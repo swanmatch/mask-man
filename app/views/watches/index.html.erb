@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Watches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Temp</th>
+      <th>Human</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @watches.each do |watch| %>
+      <tr>
+        <td><%= l watch.created_at %></td>
+        <td><%= watch.temp %></td>
+        <td><%= watch.human %></td>
+        <td><%= link_to 'Show', watch %></td>
+        <td><%= link_to 'Edit', edit_watch_path(watch) %></td>
+        <td><%= link_to 'Destroy', watch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Watch', new_watch_path %>
