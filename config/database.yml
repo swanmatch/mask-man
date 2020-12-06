@@ -11,7 +11,6 @@
 #
 default: &default
   adapter: mysql2
-  encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: admin
@@ -19,7 +18,11 @@ default: &default
 
 development:
   <<: *default
+  encoding: utf8mb4
   database: mask_development
+  username: root
+  password: admin
+  socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -49,6 +52,8 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: mask_production
-  username: mask
-  password: <%= ENV['MASK_DATABASE_PASSWORD'] %>
+  # username: mask
+  # password: <%= ENV['MASK_DATABASE_PASSWORD'] %>
+  adapter: postgresql
